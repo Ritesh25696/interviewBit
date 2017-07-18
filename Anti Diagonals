@@ -1,0 +1,50 @@
+Give a N*N square matrix, return an array of its anti-diagonals. Look at the example for more details.
+
+Example:
+
+		
+Input: 	
+
+1 2 3
+4 5 6
+7 8 9
+
+Return the following :
+
+[ 
+  [1],
+  [2, 4],
+  [3, 5, 7],
+  [6, 8],
+  [9]
+]
+
+**************************************************************************************************************************
+
+vector<vector<int> > Solution::diagonal(vector<vector<int> > &A) {
+    vector<vector<int>> result;
+    vector<int> ref;
+    for(int i=0 ; i<A[0].size() ; i++){
+        int col = i;
+        int row = 0;
+        while(col >= 0 ){
+            ref.push_back(A[row][col]);
+            row++;
+            col--;
+        }
+        result.push_back(ref);
+        ref.clear();
+    }
+    for(int i=1; i<A.size() ; i++){
+        int row = i;
+        int col = A.size()-1;
+        while(row<A.size()){
+            ref.push_back(A[row][col]);
+            row++;
+            col--;
+        }
+        result.push_back(ref);
+        ref.clear();
+    }
+    return result;
+}
