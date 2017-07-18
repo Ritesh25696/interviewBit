@@ -1,0 +1,53 @@
+Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+
+Example:
+
+Given n = 3,
+
+You should return the following matrix:
+ [ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ] ] 
+
+**********************************************************************************************************
+
+vector<vector<int> > Solution::generateMatrix(int num) {
+   	vector<vector<int>> A(num, vector<int>(num, 0));
+    int top = 0 , bottom = A.size()-1, left = 0 , right = A[0].size()-1 , dir =0 ;
+    int n = 1;
+    while(top<=bottom && left<=right){
+        if(dir == 0){
+            for(int i=left ; i<=right ; i++){
+                A[top][i] = n;
+                n++;
+            }
+                top++;
+                dir = 1;
+        }
+        else if(dir == 1){
+            for(int i=top ; i<=bottom ; i++){
+                A[i][right] = n;
+                n++;
+            }
+                right--;
+                dir = 2;
+        }
+        else if (dir == 2){
+            for(int i=right ; i >= left ; i--){
+                A[bottom][i] = n;
+                n++;
+            }
+                bottom--;
+                dir = 3;
+            
+        }
+        else{
+            for(int i=bottom; i>= top ; i--){
+                A[i][left] = n;
+                n++;
+            }
+                left++;
+                dir = 0;
+            
+        }
+    }
+	return A;
+}
