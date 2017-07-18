@@ -1,0 +1,54 @@
+Find out the maximum sub-array of non negative numbers from an array.
+The sub-array should be continuous. That is, a sub-array created by choosing the second and fourth element and skipping the third element is invalid.
+
+Maximum sub-array is defined in terms of the sum of the elements in the sub-array. Sub-array A is greater than sub-array B if sum(A) > sum(B).
+
+Example:
+
+A : [1, 2, 5, -7, 2, 3]
+The two sub-arrays are [1, 2, 5] [2, 3].
+The answer is [1, 2, 5] as its sum is larger than [2, 3]
+
+***********************************************************************************************************
+vector<int> Solution::maxset(vector<int> &A) {
+vector<long long int> ref(A.size());
+vector<int> result;
+ref[0] = A[0];
+int negitive = A[0]>=0 ? 0 :1 ;
+for(int i=1 ; i<A.size() ; i++){
+    if(A[i]<0){
+        negitive++;
+    }
+    if(A[i] >=0 && A[i-1]>=0){
+        ref[i] = ref[i-1]+A[i];
+    }
+     else{
+        ref[i] = A[i];
+    }
+}
+if(negitive == A.size()){
+    return result;
+}
+long long int max = INT_MIN;
+int max_index = 0 , start = 0 , g_start = 0;
+for(int i=0 ; i<ref.size();i++){
+    if(ref[i] >= 0 && ref[i-1]<0){
+        start = i;
+    }
+    if(ref[i] > max){
+        max = ref[i];
+        max_index = i;
+        g_start = start;
+    }
+    else if(ref[i] == max){
+        if(i-start > (max_index-g_start)){
+            g_start = start;
+            max_index = i;
+        }
+    }
+}
+
+for(int i=g_start ; i<=max_index ; i++){
+    result.push_back(A[i]);
+}
+return result;}
