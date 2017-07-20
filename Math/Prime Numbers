@@ -1,0 +1,35 @@
+Given a number N, find all prime numbers upto N ( N included ).
+
+Example:
+
+if N = 7,
+
+all primes till 7 = {2, 3, 5, 7}
+
+Make sure the returned array is sorted.
+
+**********************************************************************************************************************
+
+vector<int> Solution::sieve(int A) {
+  vector<int> prime(A+1,1);
+  prime[0]=0;
+  prime[1]=0;
+  vector<int> res;
+  if(A < 2){
+      res.push_back(0);
+      return res;
+  }
+   for (int p=2; p*p<=A; p++)
+    {
+        if (prime[p] == true)
+        {
+            for (int i=p*2; i<=A; i += p)
+                prime[i] = false;
+        }
+    }
+
+  for(int i = 0 ; i<prime.size() ; i++){
+      if(prime[i] == 1) res.push_back(i);
+  }
+  return res;
+}
