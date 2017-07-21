@@ -1,0 +1,28 @@
+Given a number N >= 0, find its representation in binary.
+
+Example:
+
+if N = 6,
+
+binary form = 110
+
+********************************************************************************************************
+
+string Solution::findDigitsInBinary(int A) {
+   vector<int> res;
+   string ans;
+   if(A == 0){
+       ans += '0';
+       return ans;
+   }
+   while(A >0 ){
+       int rem = A % 2;
+       res.push_back(rem);
+       A /= 2;
+   }
+   reverse(res.begin(),res.end());
+   
+   for(int i=0 ; i<res.size() ; i++)
+   ans += to_string(res[i]);
+   return ans;
+}
