@@ -1,0 +1,27 @@
+bool Solution::isPalindrome(int A) {
+    if(A<0)return 0;
+int b = A;
+int rev = 0;
+while(b > 0){
+    int k = b%10;
+    rev = rev*10 + k;
+    b/=10;
+}
+if(rev == A)return 1;
+return 0;
+}
+
+************************************************************************************************
+
+bool Solution::isPalindrome(int A) {
+    if(A<0)return 0;
+int b = A;
+int rev = 0;
+while(b > 0){
+    int k = b%10;
+    rev = rev*10 + k;
+    b/=10;
+}
+if(rev == A)return 1;
+return 0;
+}
