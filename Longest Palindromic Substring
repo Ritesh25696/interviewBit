@@ -1,0 +1,37 @@
+Substring of string S:
+
+S[i...j] where 0 <= i <= j < len(S)
+
+Palindrome string:
+
+A string which reads the same backwards. More formally, S is palindrome if reverse(S) = S.
+
+Incase of conflict, return the substring which occurs first ( with the least starting index ).
+
+Example :
+
+Input : "aaaabaaa"
+Output : "aaabaaa"
+
+*************************************************************************************************
+
+string Solution::longestPalindrome(string A) {
+      int n = A.length() , len = A.length();
+   while(len > 0){
+       int j = 0;
+       while(j+len <= n){
+           int start = j,end = j+len-1;
+           while(start < end){
+            if(A[start] != A[end]) break;
+            start++; end--;
+           }
+           if(start >= end){
+               return A.substr(j  , len);
+           }
+           j++;
+       }
+       len--;
+   }
+   string res = "";
+   return res;
+}
