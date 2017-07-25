@@ -1,0 +1,54 @@
+Given an integer, convert it to a roman numeral, and return a string corresponding to its roman numeral version
+
+Input is guaranteed to be within the range from 1 to 3999.
+
+Example :
+
+Input : 5
+Return : "V"
+
+Input : 14
+Return : "XIV"
+ Note : This question has a lot of scope of clarification from the interviewer. Please take a moment to think of all the needed clarifications and see the expected response using “See Expected Output” For the purpose of this question, https://projecteuler.net/about=roman_numerals has very detailed explanations. 
+
+********************************************************************************************************************************
+
+string Solution::intToRoman(int A) {
+ map<int , string> value;
+   value[1] = "I";
+   value[4] = "IV";
+   value[5] = "V";
+   value[9] = "IX";
+   value[10] = "X";
+   value[40] = "XL";
+   value[50] = "L";
+   value[90] = "XC";
+   value[100] = "C";
+   value[400] = "CD";
+   value[500] = "D";
+   value[900]= "CM";
+   value[1000] = "M";
+   
+vector<int> bases = {1000,
+        900,
+        500,
+        400,
+        100,
+        90,
+        50,
+        40,
+        10, 
+        9,
+        5,
+        4,
+        1};
+string res = "";
+    for(int i=0 ; i<bases.size() ; i++){
+        while(A>=bases[i]){
+            res+=value[bases[i]];
+            A -= bases[i];
+        }
+    }
+
+return res;
+}
