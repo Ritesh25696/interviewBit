@@ -1,0 +1,92 @@
+Pretty print a json object using proper indentation.
+
+Every inner brace should increase one indentation to the following lines.
+Every close brace should decrease one indentation to the same line and the following lines.
+The indents can be increased with an additional ‘\t’
+Example 1:
+
+Input : {A:"B",C:{D:"E",F:{G:"H",I:"J"}}}
+Output : 
+{ 
+    A:"B",
+    C: 
+    { 
+        D:"E",
+        F: 
+        { 
+            G:"H",
+            I:"J"
+        } 
+    }     
+}
+Example 2:
+
+Input : ["foo", {"bar":["baz",null,1.0,2]}]
+Output : 
+[
+    "foo", 
+    {
+        "bar":
+        [
+            "baz", 
+            null, 
+            1.0, 
+            2
+        ]
+    }
+]
+[] and {} are only acceptable braces in this case.
+
+Assume for this problem that space characters can be done away with.
+
+Your solution should return a list of strings, where each entry corresponds to a single line. The strings should not have “\n” character in them.
+
+
+***********************************************************************************************************************************************************************
+
+vector<string> Solution::prettyJSON(string A) {
+  vector<string> res;
+   string spaceadd = "\t";
+   stringstream ss;
+   string s;
+   char c = A[0];
+   ss << c;
+   ss >> s;
+   res.push_back(s);
+   string tobeins = "\t";
+   for(int i=1 ; i<A.size() ; i++){
+        if(A[i] == ' ')continue;
+        else if(A[i] == '[' || A[i] == '{'){
+        string temp = spaceadd;
+        temp += A[i];
+        res.push_back(temp);
+        spaceadd += "\t";
+        tobeins = spaceadd;
+       }
+       else if(A[i] == ']' || A[i] == '}'){
+           if(tobeins != ""){
+           res.push_back(tobeins);
+           tobeins = ""; 
+           }
+           
+           spaceadd.erase(spaceadd.begin());
+           string temp = spaceadd;
+           temp += A[i];
+           if(A[i+1] == ','){
+               temp+=A[i+1];
+               i++;
+               tobeins = spaceadd;
+           }
+           res.push_back(temp);
+       }
+       else if(A[i] == ',' || (A[i] == ':' && A[i+1] == '{' )|| (A[i] == ':' && A[i+1] == '[')){
+           tobeins += A[i];
+           res.push_back(tobeins);
+           tobeins = spaceadd;
+       }
+       else{
+        tobeins += A[i];
+       }
+   }
+   return res;
+}
