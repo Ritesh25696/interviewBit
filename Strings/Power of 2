@@ -1,0 +1,42 @@
+Find if Given number is power of 2 or not. 
+More specifically, find if given number can be expressed as 2^k where k >= 1.
+
+Input:
+
+number length can be more than 64, which mean number can be greater than 2 ^ 64 (out of long long range)
+Output:
+
+return 1 if the number is a power of 2 else return 0
+
+Example:
+
+Input : 128
+Output : 1
+
+********************************************************************************************************************
+
+int Solution::power(string A) {
+     while(A.length() >0)
+    {
+    string temp = "";
+    int carry = 0;
+
+        if(A.length() == 1){
+        if(A[0] == '4' ||A[0] == '2' ||A[0] == '8' ) return 1;
+        else return 0;
+    }
+    int last = A[A.length()-1]-'0';
+    if((last % 2) != 0)return 0;
+    for(int i=0 ; i<A.size() ; i++){
+    int k = carry*10  + A[i]-48;
+    carry = k%2;
+    int val = k/2;
+    if(val != 0)
+    temp += val+48;
+    else if(temp.length() > 0 && val == 0)
+    temp += val+48;
+    }
+    A = temp;
+    }
+    }
+    
