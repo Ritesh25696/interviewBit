@@ -1,0 +1,39 @@
+Given an input string, reverse the string word by word.
+
+Example:
+
+Given s = "the sky is blue",
+
+return "blue is sky the".
+
+A sequence of non-space characters constitutes a word.
+Your reversed string should not contain leading or trailing spaces, even if it is present in the input string.
+If there are multiple spaces between words, reduce them to a single space in the reversed string.
+
+*********************************************************************************************************
+
+void Solution::reverseWords(string &A) {
+    string res = "";
+   while(A[A.length()-1] == ' ')A.erase(A.begin()+A.length()-1);
+   while(A[0] == ' ')A.erase(A.begin());
+   string temp = "";
+   for(int i=0 ; i<A.length() ; i++){
+
+    if(A[i] == ' '){
+        if(temp.length() > 0){
+            temp += " ";
+            res.insert(0,temp);
+            temp = "";
+        }
+    }
+    if(A[i] != ' '){
+    temp += A[i];
+    }
+   }
+   if(temp.length() > 0){
+        temp += " ";
+        res.insert(0,temp);}
+   res.erase(res.begin()+res.length()-1);
+   A = res;
+   
+}
