@@ -1,0 +1,61 @@
+Given two binary strings, return their sum (also a binary string).
+
+Example:
+
+a = "100"
+
+b = "11"
+Return a + b = “111”.
+
+*************************************************************************************************************
+
+string Solution::addBinary(string A, string B) {
+  string res = "";
+  if(B.length() > A.length()){
+      string temp = B;
+      B = A;
+      A = temp;
+  }
+  while(B.length() != A.length()){
+    B.insert(B.begin(), '0');
+  }
+  if(A.length() == 0 && B.length() == 0)return res;
+  if(A.length() == 0)return B;
+  if(B.length() == 0)return A;
+  char carry = '0';
+  int i = A.size()-1; int j = B.size()-1;
+  while(j>=0 && i>=0){
+      if(A[i] == '0' && B[j] == '0') {
+          if(carry == '0')
+          res+='0';
+          else {
+              res+='1';
+              carry = '0';
+          }
+      }
+      else if ((A[i]== '0' && B[j] == '1') ||(B[j] == '0' && A[i] == '1')){
+          if(carry == '0'){
+            res+='1';
+            carry = '0';
+          }
+          else{
+              res += '0';
+          }
+
+      }
+      else if(A[i] == '1' && B[i] == '1'){
+          if(carry == '0'){
+              res+='0';
+              carry = '1';
+          }
+          else{
+              res+='1';
+              carry = '1';
+          }
+      }
+      j-- , i--;
+  }
+  if(carry != '0')res+= carry;
+  reverse(res.begin() , res.end());
+  return res;
+}
