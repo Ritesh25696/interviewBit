@@ -27,7 +27,5 @@ int Solution::removeDuplicates(vector<int> &A) {
     }
  }
  A.erase(A.begin()+ins, A.begin()+A.size());
- for(int i=0 ; i< A.size() ; i++){
- }
  return A.size();
 }
