@@ -1,0 +1,31 @@
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+For example,
+Given 1->1->2, return 1->2.
+Given 1->1->2->3->3, return 1->2->3.
+
+***************************************************************************************************************************************
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ListNode* Solution::deleteDuplicates(ListNode* A) {
+  ListNode *temp =A;
+  ListNode *temp2;
+  while(temp ->next != NULL){
+     temp2 = temp->next;
+     if(temp2->val == temp->val){
+         temp->next = temp2->next;
+         delete(temp2);
+         
+     }else{
+         temp = temp->next;
+     }     
+     }
+return A;
+}
