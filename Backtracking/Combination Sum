@@ -1,0 +1,39 @@
+Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+The same repeated number may be chosen from C unlimited number of times.
+
+ Note:
+All numbers (including target) will be positive integers.
+Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+The combinations themselves must be sorted in ascending order.
+CombinationA > CombinationB iff (a1 > b1) OR (a1 = b1 AND a2 > b2) OR … (a1 = b1 AND a2 = b2 AND … ai = bi AND ai+1 > bi+1)
+The solution set must not contain duplicate combinations.
+Example, 
+Given candidate set 2,3,6,7 and target 7,
+A solution set is:
+
+[2, 2, 3]
+[7]
+
+********************************************************************************************************************************************************************************
+
+void combihelper(vector<vector<int>> &ans, vector<int> &row, vector<int> &A ,int B , int i){
+    if(B == 0){
+        ans.push_back(row);
+        return;
+    }
+    if(B<0 || i==A.size())return;
+    row.push_back(A[i]);
+    combihelper(ans , row , A , B-A[i] , i);
+    row.pop_back();
+    combihelper(ans , row , A , B , i+1);
+}
+
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+   vector<vector<int>> ans;
+   vector<int> row;
+   sort(A.begin() , A.end());
+  A.erase( unique( A.begin(), A.end() ), A.end() );
+   combihelper(ans , row , A , B , 0);
+   return ans;
+}
