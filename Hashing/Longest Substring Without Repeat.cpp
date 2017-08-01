@@ -26,9 +26,7 @@ int Solution::lengthOfLongestSubstring(string A) {
                mymap.erase(A[p]);
                p++;
            }
-            if(p!=q){
                p++;
-            }
             mymap.erase(A[q]);
             
         }
