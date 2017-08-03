@@ -12,11 +12,11 @@ max depth = 2.
 
 ************************************************************************************************************
 
-int md(TreeNode *A , int depth){
+int md(TreeNode *A ){
     if(A == NULL)return 0;
-    return  max(md(A->left,depth+1),md(A->right, depth+1))+1;
+    return  max(md(A->left),md(A->right))+1;
 }
  
 int Solution::maxDepth(TreeNode* A) {
-    return md(A,0);
+    return md(A);
 }
